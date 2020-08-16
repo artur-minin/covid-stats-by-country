@@ -23,10 +23,10 @@ const DayStatistics = ({ statisticsByDays }) => {
   )
 
   return (
-    <div>
+    <div className='top-recovered-cases'>
       <h2>Top Recovered Cases</h2>
-      <div>{topRecoveredCases.recovered}</div>
-      <div>{topRecoveredCases.date}</div>
+      <div className='top-recovered-cases__number'>{topRecoveredCases.recovered}</div>
+      <div className='top-recovered-cases__date'>{topRecoveredCases.date}</div>
     </div>
   )
 }

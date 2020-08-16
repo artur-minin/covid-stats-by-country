@@ -1,0 +1,46 @@
+.block {
+  background: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  align-items: center;
+
+  &__day {
+    font-weight: 500;
+    font-size: 22px;
+    color: #242632;
+    flex: 1;
+    padding-left: 20px;
+    min-width: 200px;
+  }
+
+  &__stat {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 18px;
+  }
+
+  &__element {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: calc(50% - 30px);
+    &:nth-child(-n + 2) {
+      margin-bottom: 22px;
+    }
+    &:nth-child(2n - 1) {
+      margin-right: 15px;
+    }
+    &:nth-child(2n) {
+      margin-left: 15px;
+    }
+
+    & > span {
+      background-color: #edf7ff;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: 700;
+    }
+  }
+}

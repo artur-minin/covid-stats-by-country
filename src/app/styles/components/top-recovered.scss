@@ -1,0 +1,28 @@
+.top-recovered-cases {
+  background: #1bbc9b;
+  border-radius: 5px;
+  padding: 40px 40px 20px;
+  color: #fff;
+  height: 100%;
+  text-align: center;
+  width: 380px;
+  margin-left: 20px;
+
+  h2 {
+    font-weight: 500;
+    font-size: 28px;
+  }
+  &__number {
+    font-weight: bold;
+    font-size: 100px;
+    line-height: 117px;
+    margin: 96px 0;
+  }
+  &__date {
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 20px;
+  }
+}

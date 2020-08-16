@@ -5,6 +5,7 @@ import { getTotalCountryStatistics } from '../../redux/modules/countryStatistics
 
 import DayStatistcs from '../components/DayStatistcs'
 import TopRecoveredCases from '../components/TopRecoveredCases'
+import ErrorBoundary from '../components/ErrorBoundary'
 
 class App extends Component {
   state = {
@@ -12,54 +13,73 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.getAvailableCountries()
-    this.props.getTotalCountryStatistics('kyrgyzstan')
+    const { activeCountry } = this.state
+    const { getAvailableCountries, getTotalCountryStatistics } = this.props
+    getAvailableCountries()
+    getTotalCountryStatistics(activeCountry)
   }
 
   changeActiveCountry(event) {
-    this.setState({ activeCountry: event.target.value })
+    const { getTotalCountryStatistics } = this.props
+    const activeCountry = event.target.value
+    this.setState({ activeCountry }, () => {
+      getTotalCountryStatistics(activeCountry)
+    })
   }
 
   render() {
+    const { activeCountry } = this.state
+    const { availableCountries, statisticsByDays } = this.props
+
     return (
-      <div>
-        <select
-          value={this.state.activeCountry}
-          onChange={event => this.changeActiveCountry(event)}
-        >
-          {this.props.availableCountries.map(country => {
-            return (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            )
-          })}
-        </select>
+      <ErrorBoundary>
+        <div className='container app'>
+          <select
+            className='change-country'
+            value={activeCountry}
+            onChange={event => this.changeActiveCountry(event)}
+          >
+            {availableCountries.map(country => {
+              return (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              )
+            })}
+          </select>
 
-        {this.props.statisticsByDays
-          .slice(-5)
-          .map(({ Active, Confirmed, Deaths, Recovered, Date: date }) => {
-            const formattedDate = new Intl.DateTimeFormat('en-US', {
-              month: 'long',
-              day: 'numeric'
-            }).format(new Date(date))
+          {statisticsByDays.length ? (
+            <div className='content'>
+              <div>
+                {statisticsByDays
+                  .slice(-5)
+                  .reverse()
+                  .map(({ Active, Confirmed, Deaths, Recovered, Date: date }) => {
+                    const formattedDate = new Intl.DateTimeFormat('en-US', {
+                      month: 'long',
+                      day: 'numeric'
+                    }).format(new Date(date))
 
-            return (
-              <DayStatistcs
-                key={date}
-                date={formattedDate}
-                active={Active}
-                deaths={Deaths}
-                confirmed={Confirmed}
-                recovered={Recovered}
-              />
-            )
-          })}
+                    return (
+                      <DayStatistcs
+                        key={date}
+                        date={formattedDate}
+                        active={Active}
+                        deaths={Deaths}
+                        confirmed={Confirmed}
+                        recovered={Recovered}
+                      />
+                    )
+                  })}
+              </div>
 
-        {this.props.statisticsByDays.length && (
-          <TopRecoveredCases statisticsByDays={this.props.statisticsByDays} />
-        )}
-      </div>
+              <TopRecoveredCases statisticsByDays={statisticsByDays} />
+            </div>
+          ) : (
+            <h1 class='no-stat'>No statistics for this country</h1>
+          )}
+        </div>
+      </ErrorBoundary>
     )
   }
 }
