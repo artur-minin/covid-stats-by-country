@@ -5,14 +5,11 @@ import {
 } from './actionsTypes'
 import countryStatisticsApi from '../../../app/api/countryStatistics'
 
-export const getAvailableCountries = country => dispatch => {
+export const getTotalCountryStatistics = country => dispatch => {
   dispatch({ type: GET_TOTAL_STATISTICS_BY_COUNTRY_PENDING })
   countryStatisticsApi
     .getTotalStatisticsByCountry(country)
-    .then(response => {
-      return response.json()
-    })
-    .then(days => {
+    .then(({ data: days }) => {
       const formattedData = days.map(({ Active, Confirmed, Deaths, Recovered, Date }) => ({
         Active,
         Confirmed,
@@ -20,6 +17,7 @@ export const getAvailableCountries = country => dispatch => {
         Recovered,
         Date
       }))
+
       dispatch({ type: GET_TOTAL_STATISTICS_BY_COUNTRY_SUCCEED, payload: formattedData })
     })
     .catch(error => {

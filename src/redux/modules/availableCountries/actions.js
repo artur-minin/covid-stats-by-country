@@ -8,11 +8,9 @@ import availableCountriesApi from '../../../app/api/availableCountries'
 export const getAvailableCountries = () => dispatch => {
   dispatch({ type: GET_AVAILABLE_COUNTRIES_PENDING })
   availableCountriesApi
-    .then(response => {
-      return response.json()
-    })
-    .then(countries => {
-      const formattedData = countries.map(({ slug }) => slug)
+    .getCountries()
+    .then(({ data: countries }) => {
+      const formattedData = countries.map(({ Slug }) => Slug)
       dispatch({ type: GET_AVAILABLE_COUNTRIES_SUCCEED, payload: formattedData })
     })
     .catch(error => {
