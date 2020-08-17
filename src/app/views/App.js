@@ -50,13 +50,19 @@ class App extends Component {
           value={activeCountry}
           onChange={event => this.changeActiveCountry(event)}
         >
-          {availableCountries.map(({ Country, Slug }) => {
-            return (
-              <option key={Country} value={Slug}>
-                {Country}
-              </option>
-            )
-          })}
+          {availableCountries
+            .sort(({ Country: firstCountry }, { Country: secondCountry }) => {
+              return (
+                firstCountry.toLowerCase().charCodeAt(0) - secondCountry.toLowerCase().charCodeAt(0)
+              )
+            })
+            .map(({ Country, Slug }) => {
+              return (
+                <option key={Country} value={Slug}>
+                  {Country}
+                </option>
+              )
+            })}
         </select>
 
         {formattedStatisticsByDays.length ? (
