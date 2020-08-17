@@ -1,44 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 @import 'layout/reset.scss';
+@import 'variables.scss';
 @import 'common.scss';
-@import './components/day-statistic.scss';
+@import './components/day-statistics.scss';
 @import './components/top-recovered.scss';
 @import './components/error-boundary.scss';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  background-color: #edf7ff;
+  background-color: $light-blue;
 }
 
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
+.main-container {
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 66px 15px 0 15px;
   margin-right: auto;
   margin-left: auto;
 }
-.app {
-  padding: 66px 0;
-}
+
 .content {
   display: flex;
-}
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .main-container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-container {
+    width: 1170px;
+  }
 }

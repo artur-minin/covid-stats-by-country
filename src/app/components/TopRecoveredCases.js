@@ -1,34 +1,31 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const DayStatistics = ({ statisticsByDays }) => {
+const TopRecoveredCases = ({ statisticsByDays }) => {
   const topRecoveredCases = statisticsByDays.reduce(
-    (max, day, index) => {
+    (max, { Date, Recovered }, index) => {
       if (index > 0) {
-        const previousDay = statisticsByDays[index - 1]
-        const recovered = day.Recovered - previousDay.Recovered
-
-        const formattedDate = new Intl.DateTimeFormat('en-US', {
-          month: 'long',
-          day: 'numeric'
-        }).format(new Date(day.Date))
-
-        if (recovered > max.recovered) {
-          max = { date: formattedDate, recovered }
+        if (Recovered > max.Recovered) {
+          max = { Date, Recovered }
         }
       }
 
       return max
     },
-    { date: statisticsByDays[0].Date, recovered: statisticsByDays[0].Recovered }
+    { Date: statisticsByDays[0].Date, Recovered: statisticsByDays[0].Recovered }
   )
 
   return (
     <div className='top-recovered-cases'>
-      <h2>Top Recovered Cases</h2>
-      <div className='top-recovered-cases__number'>{topRecoveredCases.recovered}</div>
-      <div className='top-recovered-cases__date'>{topRecoveredCases.date}</div>
+      <h3 className='top-recovered-cases__title'>Top Recovered Cases</h3>
+      <div className='top-recovered-cases__quantity'>{topRecoveredCases.Recovered}</div>
+      <div className='top-recovered-cases__date'>{topRecoveredCases.Date}</div>
     </div>
   )
 }
 
-export default DayStatistics
+TopRecoveredCases.propTypes = {
+  statisticsByDays: PropTypes.array.isRequired
+}
+
+export default TopRecoveredCases

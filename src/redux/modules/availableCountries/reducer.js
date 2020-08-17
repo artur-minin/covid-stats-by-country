@@ -7,7 +7,7 @@ import {
 const initialState = {
   countries: [],
   pending: true,
-  error: null
+  error: ''
 }
 
 export default (state = initialState, action) => {

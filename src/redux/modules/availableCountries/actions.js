@@ -10,7 +10,7 @@ export const getAvailableCountries = () => dispatch => {
   availableCountriesApi
     .getCountries()
     .then(({ data: countries }) => {
-      const formattedData = countries.map(({ Slug }) => Slug)
+      const formattedData = countries.map(({ Country, Slug }) => ({ Country, Slug }))
       dispatch({ type: GET_AVAILABLE_COUNTRIES_SUCCEED, payload: formattedData })
     })
     .catch(error => {

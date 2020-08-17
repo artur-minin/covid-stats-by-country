@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 class ErrorBoundary extends Component {
   render() {
@@ -8,7 +9,7 @@ class ErrorBoundary extends Component {
 
     const errorIndicator = (
       <div className='error-boundary'>
-        <div className='error-boundary__text'>Something went wrong :(</div>
+        <p className='error-boundary__text'>Something went wrong :(</p>
       </div>
     )
 
@@ -18,6 +19,11 @@ class ErrorBoundary extends Component {
 
     return this.props.children
   }
+}
+
+ErrorBoundary.propTypes = {
+  availableCountriesError: PropTypes.string,
+  statisticsByDaysError: PropTypes.string
 }
 
 const mapStateToProps = state => ({

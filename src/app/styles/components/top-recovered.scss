@@ -1,23 +1,25 @@
 .top-recovered-cases {
-  background: #1bbc9b;
+  background: $cyan-color;
   border-radius: 5px;
   padding: 40px 40px 20px;
-  color: #fff;
+  color: $white;
   height: 100%;
   text-align: center;
   width: 380px;
   margin-left: 20px;
 
-  h2 {
+  &__title {
     font-weight: 500;
     font-size: 28px;
   }
-  &__number {
+
+  &__quantity {
     font-weight: bold;
     font-size: 100px;
     line-height: 117px;
     margin: 96px 0;
   }
+
   &__date {
     font-weight: 500;
     font-size: 22px;

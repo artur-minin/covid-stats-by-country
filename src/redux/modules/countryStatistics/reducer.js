@@ -7,7 +7,7 @@ import {
 const initialState = {
   days: [],
   pending: true,
-  error: null
+  error: ''
 }
 
 export default (state = initialState, action) => {

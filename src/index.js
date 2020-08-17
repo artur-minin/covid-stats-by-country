@@ -1,18 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import App from './app/views/App'
-
-import './app/styles/index.scss'
 
 import configureStore from './redux/configureStore'
 import rootReducer from './redux/rootReducer'
+
+import './app/styles/index.scss'
+
+import App from './app/views/App'
+import ErrorBoundary from './app/components/ErrorBoundary'
 
 const store = configureStore(rootReducer)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </Provider>,
   document.getElementById('root')
 )
